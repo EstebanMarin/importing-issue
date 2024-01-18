@@ -32,6 +32,8 @@ Compilation failed
 Wrote configuration file for ide in: /Users/scala/../circuit-breaker-scala-cli-issue/.bsp/scala-cli.json
 ```
 
-Metals finds the file and there are no compilation errors thrown
+Metals finds the file and there are no compilation errors thrown and suggest correctly
+
+![Alt text](image.png)
 
 All of this is to ask how can import the `CircuitBreakerFactory` in the `CircuitbreakerSandBoxSuite.test.scala`
