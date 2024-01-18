@@ -25,7 +25,7 @@ Error compiling project (test, Scala 2.13.12, JVM (17))
 Compilation failed
  ```
 
- however after running
+ however, after running
 
 ```bash
 ❯ scala-cli setup-ide . --scala 2.13
