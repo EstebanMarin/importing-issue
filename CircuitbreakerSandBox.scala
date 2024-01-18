@@ -8,6 +8,9 @@
 //> using dependency io.chrisdavenport::natchez-rediculous:0.1.0
 //> using dependency org.typelevel::log4cats-core:2.6.0
 //> using dependency org.typelevel::log4cats-noop:2.6.0
+//> using test.dep com.disneystreaming::weaver-cats:0.8.3
+//> using testFramework "weaver.framework.CatsEffect"
+//> using test.toolkit typelevel:default
 
 import cats.effect.{IO, IOApp}
 import io.chrisdavenport.circuit.CircuitBreaker

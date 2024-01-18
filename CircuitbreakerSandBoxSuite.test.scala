@@ -1,17 +1,3 @@
-//> using scala 2.13.12
-//> using toolkit typelevel:default
-//> using dependency io.chrisdavenport::circuit:0.5.1
-//> using dependency io.chrisdavenport::rediculous:0.5.1
-//> using dependency io.chrisdavenport::rediculous-concurrent:0.4.0
-//> using dependency org.tpolecat::natchez-core:0.3.5
-//> using dependency org.tpolecat::natchez-noop:0.3.5
-//> using dependency io.chrisdavenport::natchez-rediculous:0.1.0
-//> using dependency org.typelevel::log4cats-core:2.6.0
-//> using dependency org.typelevel::log4cats-noop:2.6.0
-//> using test.dep com.disneystreaming::weaver-cats:0.8.3
-//> using testFramework "weaver.framework.CatsEffect"
-//> using test.toolkit typelevel:default
-
 import weaver.IOSuite
 import cats.effect.{IO, IOApp}
 import io.chrisdavenport.circuit.CircuitBreaker
@@ -26,16 +12,29 @@ import scala.concurrent.duration.FiniteDuration
 import shapeless.PolyDefns
 import CircuitbreakerSandBox._
 import CircuitbreakerSandBox.CircuitBreakerFactory
+import natchez.noop.NoopTrace
 
 object CircuitbreakerSandBoxSuite extends IOSuite {
 
-  implicit val noopTrace: Trace[IO] = ???
+  implicit val noopTrace: NoopTrace[IO] = NoopTrace[IO]
 
   val circuitBreakerFactory: CircuitBreakerFactory[IO] = impl(
     ???,
     ???,
     ???
   )
+
+  val circuitBreaker: IO[Nothing] =
+    circuitBreakerFactory
+      .customCircuitBreaker("soapAction", "id")
+      .flatMap((cb: CircuitBreaker[IO]) => ???)
+
+  def modifiedCircuitBreaker(some: String): IO[Nothing] =
+    circuitBreakerFactory
+      .customCircuitBreaker("soapAction", "id")
+      .flatMap((cb: CircuitBreaker[IO]) =>
+        cb.doOnClosed(IO(println("closed"))).protect(???)
+      )
 
   type Res = String
 
