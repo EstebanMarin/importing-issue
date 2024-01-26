@@ -29,7 +29,7 @@ object CircuitbreakerSandBoxSuite extends IOSuite {
       .customCircuitBreaker("soapAction", "id")
       .flatMap((cb: CircuitBreaker[IO]) => ???)
 
-  def modifiedCircuitBreaker(some: String): IO[Nothing] =
+  def modifiedCircuitBreaker[A](fa: IO[A]): IO[Nothing] =
     circuitBreakerFactory
       .customCircuitBreaker("soapAction", "id")
       .flatMap((cb: CircuitBreaker[IO]) =>
